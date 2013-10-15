@@ -45,6 +45,7 @@ strong{color:#4d4d4d}
 .margin-top-small{margin-top:10px}
 .margin-top-normal{margin-top:20px}
 .margin-top-big{margin-top:30px}
+.margin-bottom-big{margin-bottom: 30px;}
 .margin-bottom-large{margin-bottom:40px}
 .margin-left-large{margin-left:40px}
 
@@ -146,7 +147,7 @@ footer div .without-header{margin-top:66px;}
 .sponsors img{max-height:150px;width:85%;vertical-align: middle !important;}
 .text-sponsors{font-family: 'Merriweather Sans', Arial, sans-serif;font-weight:bold;margin-top: 15px;font-size:14px;line-height:27px;}
 
-.media .img-user-container{margin:0 20px 15px 0 !important;width:60px;height:60px;}
+.media .img-user-container{margin:0 20px 15px 0 !important;width:80px;height:80px;}
 .img-user{margin:0 20px 15px 0 !important;}
 .img-user-container .img-user{margin:0 0 15px 0 !important;}
 

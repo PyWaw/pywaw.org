@@ -48,11 +48,7 @@
         </div>
     </div>
     <div class="row margin-top-big">
-        <div class="span2 img-tip">
-            <img src="{% static 'img/links.png' %}" alt="Agenda">
-        </div>
-        <div class="span10">
-            <h2>Agenda</h2>
+        <div class="offset2 span10">
             {% for talk in meetup.talks.all %}
             <div class="media" id="talk-{{ talk.id }}">
                 <div class="media-body">
@@ -85,7 +81,7 @@
             {% for talk in meetup.talks.all %}
             {% for speaker in talk.speakers.all %}
             <div class="media" id="speaker-{{ speaker.id }}">
-            	<div class="pull-left img-users hidden-phone">
+            	<div class="pull-left img-user-container hidden-phone">
 	                <img  src="{% if speaker.photo %}{{ speaker.photo.url }}{% else %}{% static 'img/avatar.png' %}{% endif %}" alt="Zdjecie {{ speaker }}" class="img-user"><br>
                 </div>
                 <div class="media-body">
@@ -138,7 +134,7 @@
         </div>
         <div class="span10">
             <h2>Lokalizacja</h2>
-            <h4><img src="{% static 'img/location.png' %}" alt="Lokalizacja" class="icon-location"> {{ object.venue.name }}, {{ object.venue.address }}</h4>
+            <h5><img src="{% static 'img/location.png' %}" alt="Lokalizacja" class="icon-location"> {{ object.venue.name }}, {{ object.venue.address }}</h5>
             <div class="margin-top-normal">
 	            <div id="map-canvas"></div>
             </div>

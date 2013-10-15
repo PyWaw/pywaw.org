@@ -7,7 +7,7 @@
 {% block subcontent %}
 <h1>Spotkania</h1>
 {% for meetup in object_list %}
-<div class="margin-bottom-large meeting-list">
+<div class="margin-bottom-big meeting-list">
     <div class="row">
         <div class="span10 list-caption">
             <h2 class="text-number"><a href="{% url 'meetups:meetup_detail' number=meetup.number %}">{{ meetup }}</a></h2>
