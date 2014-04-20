@@ -4,7 +4,7 @@ import factory
 from datetime import datetime
 from django.test import TestCase
 from django.conf import settings
-from . import models
+from . import models, forms
 
 
 class MeetupFactory(factory.DjangoModelFactory):
@@ -117,3 +117,34 @@ class TalkProposalViewTest(TestCase):
         self.assertEqual(saved_speaker.phone, '123')
         self.assertEqual(saved_speaker.email, 'email@pywaw.org')
         self.assertEqual(saved_speaker.biography, 'short bio')
+
+
+class TalkProposalFormTest(TestCase):
+
+    def test_accepts_when_existing_speaker_is_set_and_new_speaker_fields_are_not(self):
+        speaker = SpeakerFactory(first_name='Guido', last_name='Van Rossüm')
+        form = forms.TalkProposalForm(data={
+            'talk_title': 'title',
+            'talk_description': 'description',
+            'speaker': speaker.id,
+        })
+    
+        self.assertTrue(form.is_valid())
+     
+    def test_accepts_when_new_speaker_fields_are_set_and_existing_speaker_is_not(self):
+        speaker = SpeakerFactory(first_name='Guido', last_name='Van Rossüm')
+        form = forms.TalkProposalForm(data={
+            'talk_title': 'title',
+            'talk_description': 'description',
+            'speaker': speaker.id,
+        })
+    
+        self.assertTrue(form.is_valid())
+
+    def test_rejects_when_neither_speaker_id_nor_speaker_values_are_set(self):
+        form = forms.TalkProposalForm(data={
+            'talk_title': 'title',
+            'talk_description': 'description',
+        })
+
+        self.assertFalse(form.is_valid())
