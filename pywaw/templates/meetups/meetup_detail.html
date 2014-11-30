@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load staticfiles %}
+{% load staticfiles embed_video_tags %}
 
 {% block title %}{{ meetup }} - {{ meetup.date|date:"d.m.Y" }}{% endblock %}
 
@@ -66,12 +66,13 @@
                         {% if talk.slides_url or talk.slides_file %}
 	                    <a href="{% if talk.slides_url %}{{ talk.slides_url }}{% else %}{{ talk.slides_file.url }}{% endif %}" target="_blank"><img src="{% static 'img/download.png' %}" alt="Link do prezentacji"></a>
                         {% endif %}
-	                    {% if talk.video_url %}
-	                    <a href="{{ talk.video_url }}" target="_blank"><img src="{% static 'img/video.png' %}" alt="Link do wideo"></a>
-	                    {% endif %}
                     </h3>
                     <p itemprop="description">{{ talk.description }}</p>
                 </div>
+                {% if talk.video_url %}
+                  {% video talk.video_url '780x440' %}
+                {% endif %}
+                
             </div>
             {% endfor %}
             {% if not meetup.is_ready %}

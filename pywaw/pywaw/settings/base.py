@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'south',
     'meetups',
     'misc',
+    'embed_video',
 )
 
 # A sample logging configuration. The only tangible logging
