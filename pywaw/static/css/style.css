@@ -38,7 +38,7 @@ h2{font-size:30px; margin-bottom:20px; margin-top:-4px}
 h3{font-size:24px;line-height:24px;margin-bottom:10px}
 h4{font-weight:700;font-size:20px;line-height:18px;margin-bottom:10px}
 h5{font-weight:700;font-size:15px;line-height:16px;margin-bottom:5px}
-p{font-size:14px;line-height:24px;font-weight:400;font-family:'Merriweather Sans'}
+p{font-size:14px;line-height:21px;font-weight:400;font-family:'Merriweather Sans'; margin-bottom: 15px;}
 a, a:visited{color:#4d4d4d;text-decoration:none;}
 a:hover, a:active{text-decoration:none; border-bottom:1px solid #ccc; color: #222}
 strong{color:#4d4d4d}
@@ -122,6 +122,17 @@ input[type=submit] {border: 0;}
 .page-menu li {line-height: 24px;}
 .page-menu li a {color: #4790c3;}
 
+
+.summit-tab {
+  background: url("../img/pywaw-summit.jpg");
+  position: fixed;
+  width: 40px;
+  height: 247px;
+  right: 0px;
+  top: 200px;
+  display: block;
+}
+
 /********************** 4. STRUCTURE ********************************/
 /********************** 4.1 Header **********************************/
 
@@ -130,7 +141,8 @@ header{margin:10px 0 40px}
 #top{margin:20px 0 0 0}
 
 .top-links{float:right}
-.facebook, .twitter, .youtube, .rss, .dropdown, .mail{width:30px;height:30px;display:block;float:left}
+.meetup, .facebook, .twitter, .youtube, .rss, .dropdown, .mail{width:30px;height:30px;display:block;float:left}
+.meetup{background:url("../img/icon-meetup.jpg") 0 0 no-repeat}
 .facebook{background:url("../img/icon-facebook.jpg") 0 0 no-repeat}
 .twitter{background:url("../img/icon-twitter.jpg") 0 0 no-repeat}
 .youtube{background:url("../img/icon-youtube.jpg") 0 0 no-repeat}
@@ -188,7 +200,7 @@ footer div .without-header{margin-top:66px;}
 
 .carousel{margin:0}
 
-.more-info{width:100%;border:3px dashed #ededed;-moz-box-sizing:border-box;box-sizing:border-box}
+.more-info{width:100%;border:3px dashed #ededed;-moz-box-sizing:border-box;box-sizing:border-box; margin-top: 10px;}
 .more-info h3{text-align:center;color:#cdcdcd;margin:0;font-weight:700;font-size:28px;line-height:54px}
 
 .video-landing {
@@ -222,10 +234,21 @@ footer div .without-header{margin-top:66px;}
   margin-right: 5px;
 }
 
+
+
 /********************** 5.2 Meetup ************************************/
 
 #map-canvas{width: 100%;height: 240px}
 #map-canvas img{max-width: none;}
+
+.video-meetup-details {
+  margin: 15px 0px 20px;
+}
+
+.meetup-talk {
+  margin-bottom: 0px;
+}
+
 
 /********************** 5.3 Speakers ************************************/
 

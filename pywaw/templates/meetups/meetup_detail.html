@@ -54,7 +54,7 @@
     <div class="row margin-top-big">
         <div class="offset2 span10">
             {% for talk in meetup.talks.all %}
-            <div class="media" id="talk-{{ talk.title|slugify }}" itemprop="subEvent" itemscope itemtype="http://schema.org/Event">
+            <div class="media meetup-talk" id="talk-{{ talk.title|slugify }}" itemprop="subEvent" itemscope itemtype="http://schema.org/Event">
                 <div class="media-body">
                     <h5>
                         {% for speaker in talk.speakers.all %}
@@ -70,7 +70,9 @@
                     <p itemprop="description">{{ talk.description }}</p>
                 </div>
                 {% if talk.video_url %}
-                  {% video talk.video_url '780x440' %}
+                  <div class="video-meetup-details">
+                    {% video talk.video_url '780x440' %}
+                  </div>
                 {% endif %}
                 
             </div>

@@ -52,28 +52,29 @@
 					<div id="top">
 						<div class="span7">
 							<ul class="menu-top">
-                                {% url 'meetups:meetup_list' as meetup_list_url %}
-                                {% url 'meetups:speaker_list' as speaker_list_url %}
-                                {% url 'meetups:sponsor_list' as sponsor_list_url %}
-                                {% url 'misc:home' as home_url %}
-                                <li><a href="{{ home_url }}"{% if request.path == home_url %} class="active"{% endif %}>Home</a></li>
+                {% url 'meetups:meetup_list' as meetup_list_url %}
+                {% url 'meetups:speaker_list' as speaker_list_url %}
+                {% url 'meetups:sponsor_list' as sponsor_list_url %}
+                {% url 'misc:home' as home_url %}
+                <li><a href="{{ home_url }}"{% if request.path == home_url %} class="active"{% endif %}>Home</a></li>
 								<li><a href="{{ meetup_list_url }}"{% if request.path == meetup_list_url %} class="active"{% endif %}>Spotkania</a></li>
-                                <li><a href="{{ speaker_list_url }}"{% if request.path == speaker_list_url %} class="active"{% endif %}>Prelegenci</a></li>
-                                <li><a href="{{ sponsor_list_url }}"{% if request.path == sponsor_list_url %} class="active"{% endif %}>Sponsorzy</a></li>
+                <li><a href="{{ speaker_list_url }}"{% if request.path == speaker_list_url %} class="active"{% endif %}>Prelegenci</a></li>
+                <li><a href="{{ sponsor_list_url }}"{% if request.path == sponsor_list_url %} class="active"{% endif %}>Sponsorzy</a></li>
 							</ul>
 						</div>
 						<div class="span3">
 							<div class="top-links">
+								<a href="http://www.meetup.com/PyWaw-Python-Warsaw-User-Group/" class="meetup" target="_blank"></a>
 								<a href="http://facebook.com/PyWaw" class="facebook" target="_blank"></a>
 								<a href="http://twitter.com/PyWaw" class="twitter" target="_blank"></a>
 								<a href="http://youtube.com/PyWaw" class="youtube" target="_blank"></a>
 								<div class="dropdown pull-right">
 								    <a href="#" data-toggle="dropdown" class="dropdown-toggle rss" role="button" id="drop1"></a>
 								    <ul aria-labelledby="drop1" role="menu" class="dropdown-menu">
-			                            <li role="presentation"><a href="{% url 'meetups:rss_feed' %}" tabindex="-1" role="menuitem" target="_blank">RSS</a></li>
-			                            <li role="presentation"><a href="{% url 'meetups:atom_feed' %}" tabindex="-1" role="menuitem" target="_blank">Atom</a></li>
-			                        </ul>
-			                    </div>
+	                    <li role="presentation"><a href="{% url 'meetups:rss_feed' %}" tabindex="-1" role="menuitem" target="_blank">RSS</a></li>
+	                    <li role="presentation"><a href="{% url 'meetups:atom_feed' %}" tabindex="-1" role="menuitem" target="_blank">Atom</a></li>
+			              </ul>
+			          </div>
 								<a href="mailto:info@pywaw.org" class="mail"></a>
 							</div>
 						</div>
@@ -98,8 +99,8 @@
 							<ul>
 								<li><a href="{% url 'misc:home' %}">Home</a></li>
 								<li><a href="{% url 'meetups:meetup_list' %}">Spotkania</a></li>
-                                <li><a href="{% url 'meetups:speaker_list' %}">Prelegenci</a></li>
-                                <li><a href="{% url 'meetups:sponsor_list' %}">Sponsorzy</a></li>
+                <li><a href="{% url 'meetups:speaker_list' %}">Prelegenci</a></li>
+                <li><a href="{% url 'meetups:sponsor_list' %}">Sponsorzy</a></li>
 							</ul>
 						</div>
 						<div class="span2">
@@ -109,6 +110,7 @@
 								<li><a href="http://facebook.com/PyWaw" target="_blank">Facebook</a></li>
 								<li><a href="http://twitter.com/PyWaw" target="_blank">Twitter</a></li>
 								<li><a href="http://youtube.com/PyWaw" target="_blank">YouTube</a></li>
+								<li><a href="http://www.meetup.com/PyWaw-Python-Warsaw-User-Group/" target="_blank">Meetup</a></li>
 							</ul>
 						</div>
 						<div class="span2">
@@ -118,9 +120,17 @@
 								<li><a href="http://pl.pycon.org/" target="_blank">PyCon PL</a></li>
 								<li><a href="http://blog.pykonik.org/" target="_blank">Pykonik</a></li>
 								<li><a href="http://pysilesia.org/" target="_blank">PySilesia</a></li>
+								<li><a href="http://www.meetup.com/Python-%C5%81od%C5%BA/" target="_blank">Python Łódź</a></li>
+							</ul>
+						</div>
+						<div class="span2">
+							<h5>&nbsp;</h5>
+							<ul>
 								<li><a href="http://pycircle.org/" target="_blank">PyCircle</a></li>
 								<li><a href="https://plus.google.com/communities/113848425473260356105" target="_blank">PyRa</a></li>
 								<li><a href="https://www.facebook.com/WroclawPythonUserGroup" target="_blank">wroc.py</a></li>
+								<li><a href="http://pyladies.pl" target="_blank">Pyladies Poland</a></li>
+								<li><a href="http://pystok.org" target="_blank">PyStok - Białystok</a></li>
 							</ul>
 						</div>
 						<div class="span2 powered pull-right">
@@ -150,5 +160,6 @@
 			</div>
 		</div>
 	</footer>
+	<a href="" class="summit-tab"></a>
 </body>
 </html>
