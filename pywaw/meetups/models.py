@@ -1,4 +1,7 @@
+#-*- coding: utf-8 -*-
 import datetime
+
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -26,6 +29,47 @@ class Venue(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    street = models.CharField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
+    country = models.CharField(max_length=100, null=True, blank=True)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=9)
+    create_date = models.DateTimeField(auto_now_add=True)
+    sponsor = models.ForeignKey(Sponsor, null=True, blank=True)
+    venue = models.ForeignKey(Venue, null=True, blank=True)
+    default = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{} {} ({})".format(self.first_name, self.last_name, self.email)
+
+    def clean(self):
+        if self.sponsor and self.venue:
+            msg = 'Możesz wybrać tylko jedną wartość'
+            raise ValidationError({
+                'sponsor': msg, 'venue': msg
+            })
+        elif not self.sponsor and not self.venue:
+            msg = 'Musisz wybrać jedną wartość'
+            raise ValidationError({
+                'sponsor': msg, 'venue': msg
+            })
+
+    def save(self, *args, **kwargs):
+        super(Contact, self).save(*args, **kwargs)
+        Contact.objects.filter(
+            sponsor=self.sponsor, default=True
+        ).exclude(id=self.id).update(default=False)
+        Contact.objects.filter(
+            venue=self.venue, default=True
+        ).exclude(id=self.id).update(default=False)
+
+    class Meta:
+        ordering = ['create_date']
 
 
 class MeetupManager(models.Manager):
