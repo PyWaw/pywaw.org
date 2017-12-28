@@ -1,9 +1,10 @@
 from .base import *
 
-DEBUG = False
+DEBUG = get_env_var('DEBUG') == 'true'
 TEMPLATE_DEBUG = DEBUG
 
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, '../../media')
+MEDIA_ROOT = '/media'
+STATIC_ROOT = '/static'
 
 DATABASES = {
     'default': {
@@ -11,8 +12,8 @@ DATABASES = {
         'NAME': get_env_var('DB_NAME'),
         'USER': get_env_var('DB_USER'),
         'PASSWORD': get_env_var('DB_PASSWORD'),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': get_env_var('DB_HOST'),
+        'PORT': get_env_var('DB_PORT'),
     }
 }
 
