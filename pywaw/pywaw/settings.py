@@ -1,17 +1,30 @@
+import dj_database_url
 import os
 from django.conf import global_settings
 from django.core.exceptions import ImproperlyConfigured
 
 
-def get_env_var(name, **kwargs):
+def get_env_var(key, as_bool=False, as_list=False, as_int=False, required=True, default=None):
     try:
-        return os.environ[name]
-    except KeyError:
-        if 'default' in kwargs:
-            return kwargs['default']
-        raise ImproperlyConfigured('Set the {} environment variable.'.format(name))
+        value = os.environ[key]
+        if not value:
+            raise ValueError()
+        elif as_bool:
+            return value.lower() == 'true'
+        elif as_list:
+            return value.split(',')
+        elif as_int:
+            return int(value)
+        return value
+    except (KeyError, ValueError):
+        if default is not None:
+            return default
+        if not required:
+            return None
+        raise ImproperlyConfigured('missing environment variable: {0}'.format(key))
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 ADMINS = (
     ('Admin', get_env_var('ADMIN_EMAIL', default='')),
@@ -21,7 +34,7 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.pywaw.org', '178.62.28.109']
+ALLOWED_HOSTS = ['.pywaw.org']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -48,7 +61,7 @@ USE_TZ = False
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_ROOT, '../../static')
+STATIC_ROOT = get_env_var('STATIC_ROOT', default=os.path.join(PROJECT_ROOT, '../../static'))
 LOCAL_STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # URL prefix for static files.
@@ -57,7 +70,7 @@ STATIC_URL = '/static/'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = os.path.join(STATIC_ROOT, 'upload')
+MEDIA_ROOT = get_env_var('MEDIA_ROOT', default=os.path.join(LOCAL_STATIC_ROOT, 'upload'))
 
 SPONSOR_LOGOS_DIR = 'sponsors'
 MEETUP_PHOTOS_DIR = 'meetup_photos'
@@ -83,7 +96,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -93,7 +106,7 @@ SECRET_KEY = get_env_var('SECRET_KEY', default='secret')
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -167,3 +180,20 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
 MEETUP_NAME = 'PyWaw'
 
 TALK_PROPOSAL_RECIPIENTS = ['info@pywaw.org']
+
+DEBUG = get_env_var('DEBUG', as_bool=True, default=True)
+TEMPLATE_DEBUG = DEBUG
+
+DATABASES = {
+    'default': dj_database_url.parse(get_env_var('DATABASE_URL', default='postgres://postgres:postgres@localhost/postgres')),
+}
+
+EMAIL_BACKEND = get_env_var('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+
+EMAIL_HOST = get_env_var('EMAIL_HOST', required=False)
+EMAIL_PORT = get_env_var('EMAIL_PORT', as_int=True, required=False)
+EMAIL_USE_TLS = get_env_var('EMAIL_USE_TLS', as_bool=True, required=False)
+EMAIL_HOST_USER = get_env_var('EMAIL_HOST_USER', required=False)
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = get_env_var('EMAIL_HOST_PASSWORD', required=False)
+SERVER_EMAIL = EMAIL_HOST_USER

@@ -10,11 +10,8 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=$DEBUG
-      - DB_NAME=$DB_NAME
-      - DB_USER=$DB_USER
-      - DB_PASSWORD=$DB_PASSWORD
-      - DB_HOST=$DB_HOST
-      - DB_PORT=$DB_PORT
+      - DATABASE_URL=$DATABASE_URL
+      - EMAIL_BACKEND=$EMAIL_BACKEND
       - EMAIL_HOST=$EMAIL_HOST
       - EMAIL_PORT=$EMAIL_PORT
       - EMAIL_USE_TLS=$EMAIL_USE_TLS
@@ -22,10 +19,11 @@ services:
       - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
       - ADMIN_EMAIL=$ADMIN_EMAIL
       - SECRET_KEY=$SECRET_KEY
-      - DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS
+      - MEDIA_ROOT=$MEDIA_ROOT
+      - STATIC_ROOT=$STATIC_ROOT
     volumes:
-      - "${DATA_PATH}/static:/static"
-      - "${DATA_PATH}/media:/media"
+      - "${DATA_PATH}/static:${STATIC_ROOT}"
+      - "${DATA_PATH}/media:${MEDIA_ROOT}"
   db:
     image: postgres:10.1
     environment:
