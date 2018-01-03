@@ -1,12 +1,14 @@
-from django.conf.urls import patterns, include, url
-from django.contrib import admin
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls import include
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    url(r'^', include('misc.urls', namespace='misc')),
-    url(r'^', include('meetups.urls', namespace='meetups')),
-    url(r'^admin/', include(admin.site.urls)),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns = [
+    path('', include('misc.urls', namespace='misc')),
+    path(r'', include('meetups.urls', namespace='meetups')),
+    path('admin/', admin.site.urls),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

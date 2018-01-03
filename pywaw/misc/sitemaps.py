@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import GenericSitemap, Sitemap
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from meetups.models import Meetup
 
 
