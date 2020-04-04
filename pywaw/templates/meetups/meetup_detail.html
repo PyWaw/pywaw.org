@@ -45,7 +45,9 @@
         <div class="span7">
             <h1 itemprop="name">{{ object }}</h1>
         </div>
+        {% if object.online_event %}
         <a href="{{ object.online_event }}" target="_blank" class="button button-block span3 button--success">DOŁĄCZ ONLINE</a>
+        {% endif %}
     </div>
     <div class="row">
         <div class="span5 offset2">
