@@ -6,6 +6,33 @@
 
 {% block og_title %}Home{% endblock %}
 
+{% block js %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhNca45HD9Q_OMp-g2qNlSLwmOqaKCwXs&amp;sensor=false"></script>
+<script type="text/javascript">
+    function initialize() {
+        var venue = new google.maps.LatLng({{ upcoming_meetup.venue.latitude }}, {{ upcoming_meetup.venue.longitude }});
+        var mapOptions = {
+            center: venue,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false,
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+        var marker = new google.maps.Marker({
+            position: venue
+        });
+        marker.setMap(map);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     {% if upcoming_meetup %}
@@ -25,7 +52,11 @@
             <div class="text-center">
                 <div class="clearfix">
                     <a href="https://maps.google.com/maps?q={{ upcoming_meetup.venue.latitude }},{{ upcoming_meetup.venue.longitude }}" target="_blank">
-                        <img src="http://maps.googleapis.com/maps/api/staticmap?zoom=15&amp;size=460x189&amp;maptype=roadmap&amp;markers=color:blue%7C{{ upcoming_meetup.venue.latitude }},{{ upcoming_meetup.venue.longitude }}&amp;sensor=false" class="map" alt="Mapa">
+                        <div class="margin-top-normal" itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+                            <div id="map-canvas"></div>
+                            <meta itemprop="latitude" content="{{ upcoming_meetup.venue.latitude }}">
+                            <meta itemprop="longitude" content="{{ upcoming_meetup.venue.longitude }}">
+                        </div>
                     </a>
                 </div>
                 <a href="{{ upcoming_meetup.get_absolute_url }}" class="button button-block margin-top-normal more">WIĘCEJ INFORMACJI</a>
@@ -65,7 +96,7 @@
             {% endif %}
         </div>
     </div>
-    
+
     {% if upcoming_meetup.sponsors.exists %}
     <div class="row">
         <div class="span10 offset2 margin-top-normal">
