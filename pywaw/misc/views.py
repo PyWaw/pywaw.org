@@ -18,3 +18,7 @@ class HomeView(generic.TemplateView):
 
 class FaqView(generic.TemplateView):
     template_name = 'misc/faq.html'
+
+
+class CocView(generic.TemplateView):
+    template_name = 'misc/coc.html'

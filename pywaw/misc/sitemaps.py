@@ -6,6 +6,7 @@ from meetups.models import Meetup
 class ViewSitemap(Sitemap):
     url_names = [
         'misc:home',
+        'misc:coc',
         'meetups:meetup_list',
         'meetups:speaker_list',
         'meetups:sponsor_list',
