@@ -236,6 +236,43 @@ footer div .without-header{margin-top:66px;}
   margin-right: 5px;
 }
 
+.discord-invite {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin-bottom: 40px;
+}
+
+.discord-invite strong {
+    color: unset;
+}
+
+.discord-invite p {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 950px) {
+  .discord-invite {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  .discord-invite p {
+    margin-bottom: 10px;
+  }
+}
+
+
+.discord-join-button {
+  display: inline-block;
+  padding: 5px 10px;
+  background: #738BD8;
+}
+
+.discord-join-button img {
+  height: 25px;
+}
+
 /********************** 5.2 Meetup ************************************/
 
 #map-canvas{width: 100%;height: 240px}
